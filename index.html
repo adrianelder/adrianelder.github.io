@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>adrianelder.github.io</title>
+</head>
+<body>
+  <script>
+    var key = 'AAAA64-jw5A:APA91bE3A-WojqC9erK5r-cmJuCmoW5DomqvQzf9HneANLB0MuOljm8qq8b-KNP4gGKUZD2g4fo6sJ10Mtqf6zF2DPUZbLwL073fGBCh3DYVfJZk6X7JD9kDmRU5uYktNxVQQAvXNTa2';
+var to = 'f_eSZXsfFF5KsudcnKTexy:APA91bE6GioXsuQtFHawuesjh-3j-NiRGe9d5tJCB3tPmn9XEZivRKGBx7HVEXb1b_RMZm3tPNXJWDDg7ZxdgH3Nn7vizzIaXjSyhDfLu4TL4hC8QP72yqr2f9zKql5BhQzd0-yjwQLl';
+var notification = {
+  'title': 'Portugal vs. Denmark',
+  'body': '5 to 1',
+  'icon': 'firebase-logo.png',
+  'click_action': 'http://localhost:8081'
+};
+
+await fetch('https://fcm.googleapis.com/fcm/send', {
+  'method': 'POST',
+  'headers': {
+    'Authorization': 'key=' + key,
+    'Content-Type': 'application/json'
+  },
+  'body': JSON.stringify({
+    'notification': notification,
+    'to': to
+  })
+}).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error(error);
+})
+  </script>
+  <p>Hello world!</p>
+</body>
+</html>
