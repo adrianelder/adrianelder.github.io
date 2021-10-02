@@ -5,47 +5,32 @@
   <title>adrianelder.github.io</title>
 </head>
 <body>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-analytics.js";
-  import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-messaging.js";
+  <script>
+    var key = 'AAAA64-jw5A:APA91bE3A-WojqC9erK5r-cmJuCmoW5DomqvQzf9HneANLB0MuOljm8qq8b-KNP4gGKUZD2g4fo6sJ10Mtqf6zF2DPUZbLwL073fGBCh3DYVfJZk6X7JD9kDmRU5uYktNxVQQAvXNTa2';
+var to = 'f_eSZXsfFF5KsudcnKTexy:APA91bE6GioXsuQtFHawuesjh-3j-NiRGe9d5tJCB3tPmn9XEZivRKGBx7HVEXb1b_RMZm3tPNXJWDDg7ZxdgH3Nn7vizzIaXjSyhDfLu4TL4hC8QP72yqr2f9zKql5BhQzd0-yjwQLl';
+var notification = {
+  'title': 'Portugal vs. Denmark',
+  'body': '5 to 1',
+  'icon': 'firebase-logo.png',
+  'click_action': 'http://localhost:8081'
+};
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyB2CvgKOKnlVVevKpitnMJzGaPSpsCMx9c",
-    authDomain: "halloween-2021.firebaseapp.com",
-    projectId: "halloween-2021",
-    storageBucket: "halloween-2021.appspot.com",
-    messagingSenderId: "1011727188880",
-    appId: "1:1011727188880:web:b2f80303a723bc72bbe915",
-    measurementId: "G-MCCC36HBBC"
-  };
-
-getToken(messaging, { vapidKey: 'BEtcI1tXAGymPB_zTsLBmqTB48tQ28kvov1H0d4lS891NNczyFlxvrCB4YgH5GWLCVLGqvSu2dOxCUpTIMKjSvk' }).then((currentToken) => {
-  if (currentToken) {
-    // Send the token to your server and update the UI if necessary
-    // ...
-  } else {
-    // Show permission request UI
-    console.log('No registration token available. Request permission to generate one.');
-    // ...
-  }
-}).catch((err) => {
-  console.log('An error occurred while retrieving token. ', err);
-  // ...
-});
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const messaging = getMessaging();
-  onMessage(messaging, (payload) => {
-    console.log('Message received. ', payload);
-  // ...
-  });
-</script>
+await fetch('https://fcm.googleapis.com/fcm/send', {
+  'method': 'POST',
+  'headers': {
+    'Authorization': 'key=' + key,
+    'Content-Type': 'application/json'
+  },
+  'body': JSON.stringify({
+    'notification': notification,
+    'to': to
+  })
+}).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error(error);
+})
+  </script>
   <p>Hello world!</p>
 </body>
 </html>
