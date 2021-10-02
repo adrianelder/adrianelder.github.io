@@ -9,7 +9,7 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-analytics.js";
-  import { getMessaging, onMessage } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-messaging.js";
+  import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-messaging.js";
 
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -22,6 +22,20 @@
     appId: "1:1011727188880:web:b2f80303a723bc72bbe915",
     measurementId: "G-MCCC36HBBC"
   };
+
+getToken(messaging, { vapidKey: 'BEtcI1tXAGymPB_zTsLBmqTB48tQ28kvov1H0d4lS891NNczyFlxvrCB4YgH5GWLCVLGqvSu2dOxCUpTIMKjSvk' }).then((currentToken) => {
+  if (currentToken) {
+    // Send the token to your server and update the UI if necessary
+    // ...
+  } else {
+    // Show permission request UI
+    console.log('No registration token available. Request permission to generate one.');
+    // ...
+  }
+}).catch((err) => {
+  console.log('An error occurred while retrieving token. ', err);
+  // ...
+});
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
